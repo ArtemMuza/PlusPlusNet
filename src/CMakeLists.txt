@@ -1,5 +1,7 @@
 SET(SOURCES 
-    main.cpp)
+    main.cpp
+    RequestParser.cpp
+    ServerListener.cpp)
 
 add_subdirectory(log_system)
 add_subdirectory(utils)

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdexcept>
-#include <string>
+#include <string.h>
 #include <functional>
 
 #include <sys/types.h> 
@@ -15,9 +15,9 @@ class ServerListener {
     int     port;
     bool    isRun;
     size_t  bufferSize;
-
     int     listen_socket;
 
+    static void clientHandler(int client_socket, size_t buffer_size);
 public:
 
     ServerListener(int port = 80, size_t buffer_size = 255);

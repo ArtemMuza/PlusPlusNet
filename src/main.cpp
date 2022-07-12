@@ -1,9 +1,13 @@
 #include <iostream>
+#include "log_system/Log_system.h"
 #include "ServerListener.h"
 
-int main() {
+LogSystem logSysInstance;
 
-    std::cout << "Hello world" << std::endl;
+int main() {
+    LogSystem_settings settings;
+    LogSystemInit(settings)
+
     ServerListener sl;
     sl.run();
 

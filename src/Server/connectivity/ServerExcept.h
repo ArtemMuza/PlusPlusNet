@@ -2,13 +2,15 @@
 
 #include <string>
 #include <stdexcept>
+#include "../../../src/log_system/Log_system.h"
 
-
-class ServerExcept : public std::runtime_error {
+class ServerExcept  {
 
 public:
 
-    ServerExcept(std::string info) : std::runtime_error(info) {}
+    ServerExcept(std::string info) {
+       ERROR<<info<<'\n';
+    }
     virtual ~ServerExcept() {}
 };
 

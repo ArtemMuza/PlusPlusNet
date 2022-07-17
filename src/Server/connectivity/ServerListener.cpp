@@ -12,6 +12,8 @@
 #include <arpa/inet.h>
 #include "../parsing/RequestParser.h"
 
+#define LISTENER_DEBUG
+
 ServerListener::ServerListener(int port, size_t buffer_size) {
 
     this->port = port;
@@ -33,7 +35,10 @@ void ServerListener::run(std::function <void (ClientAcceptationExcept)> client_a
     
     if( listen_socket < 0)
         throw SocketCreationExcept(errno);
-    
+    int blah = 1;
+    if (setsockopt(listen_socket, SOL_SOCKET, SO_REUSEADDR, &blah, sizeof(int)) < 0)
+        throw SocketCreationExcept(errno);
+
     bzero((char *) &serv_addr, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_addr.s_addr = INADDR_ANY;
@@ -69,6 +74,7 @@ void ServerListener::stop() {
     this->isRun = false;
     if( this->listen_socket != NULL ) { 
         close(this->listen_socket);
+
     }
 }
 
